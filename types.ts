@@ -35,3 +35,28 @@ export interface NewsItem {
   image: string;
   excerpt: string;
 }
+
+export interface Service {
+  id: number;
+  title: string;
+  description: string;
+  icon: string;
+  features: string[];
+}
+
+export interface Product {
+  id: number;
+  name: string;
+  type: 'vinyl' | 'merch' | 'digital';
+  price: number;
+  image: string;
+  artist?: string;
+}
+
+export interface TeamMember {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  bio?: string;
+}

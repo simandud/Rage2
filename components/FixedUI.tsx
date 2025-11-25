@@ -50,12 +50,12 @@ export const FixedUI: React.FC = () => {
           </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8 header-nav" role="navigation">
-            {['NOSOTROS', 'ARTISTAS', 'LANZAMIENTOS', 'LABEL', 'EVENTOS', 'NEWS'].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase() === 'label' ? 'music' : item.toLowerCase() === 'nosotros' ? 'about' : item.toLowerCase()}`} 
-                className="nav-link text-[11px] font-bold tracking-[0.2em] text-gray-300 hover:text-white relative group py-2"
+          <nav className="hidden lg:flex items-center gap-6 header-nav" role="navigation">
+            {['ARTISTAS', 'LABEL', 'EVENTOS', 'SERVICIOS', 'TIENDA', 'EQUIPO'].map((item) => (
+              <a
+                key={item}
+                href={`#${item.toLowerCase() === 'label' ? 'music' : item.toLowerCase() === 'servicios' ? 'services' : item.toLowerCase() === 'tienda' ? 'shop' : item.toLowerCase() === 'equipo' ? 'team' : item.toLowerCase()}`}
+                className="nav-link text-[10px] font-bold tracking-[0.2em] text-gray-300 hover:text-white relative group py-2"
               >
                 {item}
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
@@ -104,21 +104,17 @@ export const FixedUI: React.FC = () => {
             <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-purple-600 rounded-full blur-[100px]"></div>
         </div>
 
-        {['NOSOTROS', 'ARTISTAS', 'LANZAMIENTOS', 'LABEL', 'EVENTOS', 'NOTICIAS'].map((item, idx) => (
-             <a 
+        {['ARTISTAS', 'LABEL', 'EVENTOS', 'SERVICIOS', 'TIENDA', 'EQUIPO', 'CONTACTO'].map((item, idx) => (
+             <a
                 key={item}
-                href={`#${item.toLowerCase() === 'label' ? 'music' : item.toLowerCase() === 'nosotros' ? 'about' : item.toLowerCase() === 'noticias' ? 'news' : item.toLowerCase()}`} 
-                onClick={() => setIsMenuOpen(false)} 
+                href={`#${item.toLowerCase() === 'label' ? 'music' : item.toLowerCase() === 'servicios' ? 'services' : item.toLowerCase() === 'tienda' ? 'shop' : item.toLowerCase() === 'equipo' ? 'team' : item.toLowerCase() === 'contacto' ? 'contact' : item.toLowerCase()}`}
+                onClick={() => setIsMenuOpen(false)}
                 className="text-4xl font-[Bebas_Neue] tracking-wider text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 hover:to-blue-500 transition-all transform hover:scale-105"
                 style={{ transitionDelay: `${idx * 50}ms` }}
             >
                 {item}
             </a>
         ))}
-        
-        <a href="#contact" onClick={() => setIsMenuOpen(false)} className="mt-8 px-10 py-4 bg-blue-600 rounded-full font-bold tracking-widest text-white shadow-[0_0_20px_rgba(0,123,255,0.5)]">
-            CONTACTO
-        </a>
       </nav>
     </>
   );

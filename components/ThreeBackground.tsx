@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useScroll, Stars, Plane } from '@react-three/drei';
 import * as THREE from 'three';
@@ -8,6 +8,23 @@ export const ThreeBackground: React.FC = () => {
   const terrainRef = useRef<THREE.Mesh>(null);
   const starsRef = useRef<THREE.Group>(null);
   const gridRef = useRef<THREE.Mesh>(null);
+  const particlesRef = useRef<THREE.Points>(null);
+
+  // Create floating particles
+  const particlesGeometry = useMemo(() => {
+    const count = 1000;
+    const positions = new Float32Array(count * 3);
+
+    for (let i = 0; i < count * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 100;
+      positions[i + 1] = (Math.random() - 0.5) * 100;
+      positions[i + 2] = (Math.random() - 0.5) * 100;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    return geometry;
+  }, []);
 
   useFrame((state, delta) => {
     // Scroll offset (0 to 1)
@@ -35,6 +52,18 @@ export const ThreeBackground: React.FC = () => {
       starsRef.current.rotation.y = offset * 0.2;
     }
 
+    // Particles Animation: Float and rotate
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y = time * 0.05;
+      particlesRef.current.rotation.x = time * 0.02;
+
+      const positions = particlesRef.current.geometry.attributes.position.array as Float32Array;
+      for (let i = 1; i < positions.length; i += 3) {
+        positions[i] = positions[i] + Math.sin(time + positions[i]) * 0.01;
+      }
+      particlesRef.current.geometry.attributes.position.needsUpdate = true;
+    }
+
     // Camera sway based on mouse pointer
     state.camera.position.x = THREE.MathUtils.lerp(state.camera.position.x, state.pointer.x * 0.5, delta);
     state.camera.position.y = THREE.MathUtils.lerp(state.camera.position.y, state.pointer.y * 0.5, delta);
@@ -48,6 +77,18 @@ export const ThreeBackground: React.FC = () => {
       <group ref={starsRef}>
          <Stars radius={80} depth={50} count={6000} factor={4} saturation={0} fade speed={1} />
       </group>
+
+      {/* Floating Particles */}
+      <points ref={particlesRef} geometry={particlesGeometry}>
+        <pointsMaterial
+          size={0.05}
+          color="#00d4ff"
+          transparent
+          opacity={0.6}
+          sizeAttenuation
+          depthWrite={false}
+        />
+      </points>
 
       {/* Digital Terrain - Wireframe Grid */}
       <Plane 

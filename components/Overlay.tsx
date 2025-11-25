@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Play, Disc, Users, Star, ShoppingBag, Calendar, Music, Headphones, ChevronRight, SkipBack, SkipForward, Pause, MapPin, Ticket, Send, Twitter, Instagram, Youtube } from 'lucide-react';
+import { ArrowRight, Play, Disc, Users, Star, ShoppingBag, Calendar, Music, Headphones, ChevronRight, SkipBack, SkipForward, Pause, MapPin, Ticket, Send, Twitter, Instagram, Youtube, Globe, Check, ShoppingCart } from 'lucide-react';
 import { useForm, validateContactForm } from '../utils/form';
-import { ARTISTS, RELEASES, EVENTS, PLAYLISTS, GENRES, NEWS } from '../constants';
+import { ARTISTS, RELEASES, EVENTS, PLAYLISTS, GENRES, NEWS, SERVICES, PRODUCTS, TEAM } from '../constants';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -398,7 +398,160 @@ export const Overlay: React.FC = () => {
         </div>
       </section>
 
-      {/* SECTION 8: CONTACT */}
+      {/* SECTION 8: SERVICES */}
+      <motion.section
+        id="services"
+        className="panel py-32 relative bg-gradient-to-b from-blue-900/5 to-transparent"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
+        <div className="absolute top-[10%] left-[10%] w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div className="section-header">
+          <span className="section-meta">NUESTROS SERVICIOS</span>
+          <h2>POTENCIAMOS TU MÚSICA</h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">Desde producción hasta distribución global. Todo lo que necesitas para llevar tu carrera al siguiente nivel.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SERVICES.map((service) => {
+            const iconMap: { [key: string]: any } = { Music, Users, Headphones, Globe };
+            const IconComponent = iconMap[service.icon] || Music;
+
+            return (
+              <motion.div
+                key={service.id}
+                variants={cardVariant}
+                className="service-card group relative p-8 bg-white/5 border border-white/10 rounded-xl hover:border-blue-500/50 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+              >
+                <div className="absolute top-0 left-0 w-1 h-0 bg-blue-600 group-hover:h-full transition-all duration-500"></div>
+
+                <div className="service-icon w-14 h-14 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                  <IconComponent size={24} />
+                </div>
+
+                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors">{service.title}</h3>
+                <p className="text-gray-400 text-sm mb-6 leading-relaxed">{service.description}</p>
+
+                <ul className="space-y-2">
+                  {service.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
+                      <Check size={14} className="text-blue-500 flex-shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button className="mt-6 text-blue-400 text-xs font-bold tracking-widest flex items-center gap-2 group-hover:text-white transition-colors">
+                  SABER MÁS <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
+                </button>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.section>
+
+      {/* SECTION 9: SHOP */}
+      <motion.section
+        id="shop"
+        className="panel py-32 relative"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+      >
+        <div className="section-header flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+          <div className="text-left md:text-center flex-1">
+            <span className="section-meta">TIENDA</span>
+            <h2>MERCHANDISING & VINILOS</h2>
+            <p className="text-gray-400">Lleva el sonido RAGE a tu vida. Ediciones limitadas y envíos worldwide.</p>
+          </div>
+          <a href="#" className="text-xs font-bold tracking-widest border border-white/20 px-6 py-3 hover:bg-white hover:text-black transition-all">
+            VER TODO
+          </a>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {PRODUCTS.map((product) => (
+            <motion.div
+              key={product.id}
+              variants={cardVariant}
+              className="product-card group relative cursor-pointer"
+            >
+              <div className="product-image relative aspect-square overflow-hidden rounded-lg mb-4 bg-black">
+                <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+
+                {/* Product Type Badge */}
+                <div className="absolute top-3 right-3 px-3 py-1 bg-black/80 backdrop-blur-sm text-white text-[9px] font-bold uppercase tracking-wider rounded">
+                  {product.type}
+                </div>
+
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                  <button className="px-6 py-3 bg-white text-black font-bold text-xs tracking-widest hover:bg-blue-500 hover:text-white transition-colors flex items-center gap-2">
+                    <ShoppingCart size={14} /> AÑADIR
+                  </button>
+                </div>
+              </div>
+
+              <div className="product-info">
+                <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">{product.name}</h3>
+                {product.artist && <p className="text-xs text-gray-500 mb-2">{product.artist}</p>}
+                <div className="flex justify-between items-center">
+                  <span className="text-blue-400 font-bold text-lg">${product.price}</span>
+                  <span className="text-[10px] text-gray-600 font-mono uppercase">Free Shipping</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* SECTION 10: TEAM */}
+      <motion.section
+        id="team"
+        className="panel py-32 relative bg-gradient-to-b from-transparent to-blue-900/5"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainer}
+      >
+        <div className="section-header">
+          <span className="section-meta">EL EQUIPO</span>
+          <h2>MENTES DETRÁS DE RAGE</h2>
+          <p className="text-gray-400">Un colectivo de visionarios dedicados a revolucionar la música electrónica.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {TEAM.map((member) => (
+            <motion.div
+              key={member.id}
+              variants={cardVariant}
+              className="team-card group relative"
+            >
+              <div className="team-photo relative aspect-[3/4] overflow-hidden rounded-lg mb-4 bg-black">
+                <img src={member.image} alt={member.name} className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+
+                <div className="absolute bottom-0 left-0 w-full p-4">
+                  <div className="h-1 w-0 bg-blue-500 group-hover:w-full transition-all duration-500 mb-2"></div>
+                  <h3 className="text-lg font-bold text-white">{member.name}</h3>
+                  <p className="text-xs text-blue-400 uppercase tracking-wider">{member.role}</p>
+                </div>
+              </div>
+
+              {member.bio && (
+                <p className="text-xs text-gray-500 leading-relaxed">{member.bio}</p>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
+
+      {/* SECTION 11: CONTACT */}
       <section id="contact" className="panel py-32 relative overflow-hidden bg-gradient-to-t from-blue-900/10 to-transparent">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>

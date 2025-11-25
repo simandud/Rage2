@@ -22,7 +22,7 @@ const App: React.FC = () => {
         }}
       >
         <Suspense fallback={null}>
-          <ScrollControls pages={5.5} damping={0.2} distance={1}>
+          <ScrollControls pages={9} damping={0.2} distance={1}>
             <ThreeBackground />
             
             <Scroll html style={{ width: '100%' }}>
