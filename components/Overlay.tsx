@@ -43,13 +43,18 @@ export const Overlay: React.FC = () => {
           className="relative z-10 max-w-6xl mx-auto px-4 text-center mt-[-80px]"
         >
           {/* Logo representation */}
-          <div className="mb-4">
-             <span className="text-blue-400 tracking-[0.5em] text-xs md:text-sm font-bold uppercase animate-pulse">Enter the Simulation</span>
+          <div className="mb-4 flex justify-center">
+            <img 
+              src="/assets/logoragevee.png"
+              alt="RAGE VENTURE Logo"
+              className="h-48 md:h-60 lg:h-72 drop-shadow-[0_0_20px_rgba(0,85,255,0.5)] hover:drop-shadow-[0_0_40px_rgba(0,85,255,0.8)] transition-all duration-300 hover:scale-110 cursor-pointer"
+            />
           </div>
-          <h1 className="rage-logo-text mb-6">RAGE VENTURE</h1>
+
+          <span className="text-blue-400 tracking-[0.5em] text-xs md:text-sm font-bold uppercase animate-pulse">Crea sin límites. Tu sonido. Tu mundo.</span>
+          
           <p className="hero-tagline max-w-2xl mx-auto text-gray-300 text-sm md:text-lg leading-relaxed">
-            UN PORTAL INMERSIVO DE MÚSICA ELECTRÓNICA, PRODUCCIÓN Y EXPERIENCIAS VISUALES.
-            <br className="hidden md:block" /> CONECTANDO EL MUNDO FÍSICO Y DIGITAL.
+             <br className="hidden md:block" /> 
           </p>
           
           <motion.div 
@@ -58,25 +63,19 @@ export const Overlay: React.FC = () => {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="mt-12 flex flex-col md:flex-row gap-6 justify-center items-center"
           >
-            <a href="#music" className="group relative px-8 py-4 bg-white text-black font-bold tracking-widest overflow-hidden skew-x-[-10deg] transition-all hover:bg-blue-500 hover:text-white">
-              <div className="absolute inset-0 w-0 bg-black transition-all duration-[250ms] ease-out group-hover:w-full opacity-10"></div>
-              <span className="skew-x-[10deg] inline-block relative z-10 flex items-center gap-2">EXPLORAR LABEL <ArrowRight size={16}/></span>
-            </a>
-            <a href="#events" className="group px-8 py-4 border border-white/30 text-white font-bold tracking-widest hover:bg-white/10 transition-all skew-x-[-10deg]">
-               <span className="skew-x-[10deg] inline-block">EVENTOS</span>
-            </a>
+           
           </motion.div>
         </motion.div>
         
         {/* Infinite Marquee Footer of Hero */}
         <div className="marquee absolute bottom-10 w-full z-20 border-y border-white/10 bg-black/40 backdrop-blur-sm" aria-hidden="true">
           <div className="marquee-content text-gray-400">
-            RAGE VENTURE • 3D IMMERSIVE PORTAL • TECHNO • HOUSE • IDM • WORLDWIDE SHIPPING • ARTIST MANAGEMENT • STUDIO RENTAL • RAGE VENTURE • 3D IMMERSIVE PORTAL • TECHNO • HOUSE • IDM •
+            RAGE VENTURE • TECHNO • HOUSE • IDM • WORLDWIDE SHIPPING • ARTIST MANAGEMENT • STUDIO RENTAL • RAGE VENTURE • 3D IMMERSIVE PORTAL • TECHNO • HOUSE • IDM •
           </div>
         </div>
       </section>
 
-      {/* SECTION 2: ABOUT */}
+      {/* SECTION 2: ABOUT - ACTUALIZADO CON TEXTOS MÁS GRANDES */}
       <motion.section 
         id="about" 
         className="panel py-32 relative"
@@ -89,15 +88,14 @@ export const Overlay: React.FC = () => {
         
         <div className="about-container grid md:grid-cols-2 gap-16 items-center relative z-10">
           <div className="about-title">
-            <span className="section-meta">SOMOS RAGE</span>
-            <h2 className="text-white">EL FUTURO DEL SONIDO</h2>
-            <div className="h-1 w-20 bg-blue-600 mt-4"></div>
+            <span className="section-meta text-sm md:text-base">SOBRE NOSOTROS</span>
+             <div className="h-1 w-20 bg-blue-600 mt-4"></div>
           </div>
           <div className="about-content relative border-l border-white/10 pl-8">
-             <p className="text-xl text-gray-200 leading-relaxed font-light mb-6">
+             <p className="text-lg md:text-2xl text-gray-200 leading-relaxed font-light mb-6">
               Potenciamos artistas y productores para lograr más creando experiencias inmersivas en cada punto de contacto: en el metaverso, en eventos presenciales y en línea.
             </p>
-            <p className="text-gray-400 text-sm leading-relaxed mb-8">
+            <p className="text-sm md:text-base text-gray-400 leading-relaxed mb-8">
                 Con una mezcla única de estrategia, creatividad, habilidad técnica y servicio dedicado, RAGE VENTURE se posiciona como el nexo entre la cultura club tradicional y la vanguardia digital.
             </p>
             <button className="text-blue-400 text-sm font-bold tracking-widest flex items-center gap-2 hover:text-white transition-colors group">
@@ -187,108 +185,7 @@ export const Overlay: React.FC = () => {
           ))}
         </div>
       </motion.section>
-
-      {/* SECTION 5: MUSIC PLAYER & GENRES */}
-      <motion.section 
-        id="music" 
-        className="panel py-24 music-section relative"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-      >
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/10 blur-[100px] rounded-full -z-10"></div>
-
-        <div className="section-header">
-          <span className="section-meta">CURADURÍA</span>
-          <h2>PLAYLISTS & GÉNEROS</h2>
-          <p>La banda sonora de tu vida digital.</p>
-        </div>
-
-        <div className="music-layout grid md:grid-cols-[2.5fr_1fr] gap-10">
-          {/* Playlists Grid */}
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-6 md:p-8">
-            <div className="playlists-header flex justify-between items-center mb-8">
-               <h3 className="text-xl font-bold font-[Orbitron] tracking-widest text-white flex items-center gap-2">
-                 <Headphones size={20} className="text-blue-500" /> FEATURED MIXES
-               </h3>
-            </div>
-            <div className="playlists-grid grid grid-cols-2 md:grid-cols-3 gap-4">
-              {PLAYLISTS.map((playlist) => (
-                <div key={playlist.id} className="playlist-card group cursor-pointer">
-                  <div className="playlist-cover relative aspect-square rounded-lg overflow-hidden mb-3 border border-white/5">
-                    <img src={playlist.image} alt={playlist.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Music className="text-blue-400 animate-bounce" size={24} />
-                    </div>
-                  </div>
-                  <div className="playlist-name text-sm font-bold tracking-wide text-white group-hover:text-blue-400 transition-colors">{playlist.title}</div>
-                  <div className="text-[10px] text-gray-500 uppercase tracking-wider">Curated by Rage</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Genres List */}
-          <div className="genres-column flex flex-col h-full gap-4">
-             <div className="bg-black/60 border border-white/10 rounded-xl p-6 flex-1">
-               <h3 className="text-lg font-bold font-[Orbitron] tracking-widest text-white mb-6 flex items-center gap-2">
-                 <Disc size={18} className="text-blue-500" /> STYLES
-               </h3>
-               <ul className="genres-list space-y-1">
-                 {GENRES.map((genre, idx) => (
-                   <li key={idx} className="genre-card group flex items-center justify-between p-3 rounded hover:bg-white/5 cursor-pointer transition-colors">
-                     <div className="flex items-center">
-                        <span className="font-mono text-blue-500/50 text-[10px] mr-3">0{idx + 1}</span>
-                        <span className="text-sm font-bold text-gray-300 group-hover:text-white transition-colors">{genre}</span>
-                     </div>
-                     <span className="opacity-0 group-hover:opacity-100 transition-opacity text-blue-500"><Play size={10} fill="currentColor"/></span>
-                   </li>
-                 ))}
-               </ul>
-             </div>
-             
-             {/* Mini Ad */}
-             <div className="bg-gradient-to-br from-blue-900/40 to-black border border-blue-500/20 p-6 rounded-xl text-center">
-                <h4 className="text-blue-300 font-bold text-sm mb-2">SUBMIT DEMO</h4>
-                <p className="text-[10px] text-gray-400 mb-4">¿Tienes el sonido que buscamos?</p>
-                <button className="w-full py-2 bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-bold tracking-widest rounded">ENVIAR AHORA</button>
-             </div>
-          </div>
-        </div>
-
-        {/* Sticky Mini Player */}
-        <motion.div 
-            initial={{ y: 100 }}
-            whileInView={{ y: 0 }}
-            className="music-player-bar mt-6 sticky bottom-6 z-30 mx-auto max-w-4xl bg-[#0a0a12]/90 backdrop-blur-xl border border-white/10 rounded-full p-3 pr-6 shadow-[0_10px_40px_rgba(0,0,0,0.5)] flex items-center gap-4"
-        >
-          <div className="player-track-info flex items-center gap-4 flex-1">
-            <div className="w-12 h-12 rounded-full bg-gray-800 overflow-hidden relative animate-spin-slow">
-                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=100" className="w-full h-full object-cover" alt="cover"/>
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/50 to-transparent"></div>
-            </div>
-            <div className="player-meta hidden sm:block">
-              <div className="player-title text-white font-bold text-sm">Neon Pulse</div>
-              <div className="player-artist text-xs text-blue-400">Acid Horizon</div>
-            </div>
-          </div>
-          
-          <div className="player-controls flex items-center gap-4">
-            <button className="text-gray-400 hover:text-white"><SkipBack size={18} fill="currentColor" /></button>
-            <button className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform"><Pause size={18} fill="currentColor" /></button>
-            <button className="text-gray-400 hover:text-white"><SkipForward size={18} fill="currentColor" /></button>
-          </div>
-          
-          <div className="player-progress hidden md:flex items-center gap-3 w-48">
-             <span className="text-[10px] font-mono text-gray-400">0:45</span>
-             <div className="relative w-full h-1 bg-white/10 rounded-full overflow-hidden cursor-pointer group">
-                <div className="absolute left-0 top-0 h-full w-[30%] bg-blue-500 group-hover:bg-blue-400"></div>
-             </div>
-             <span className="text-[10px] font-mono text-gray-400">3:20</span>
-          </div>
-        </motion.div>
-      </motion.section>
+ 
 
       {/* SECTION 6: EVENTS */}
       <motion.section 
@@ -474,62 +371,115 @@ export const Overlay: React.FC = () => {
       </section>
 
       {/* FOOTER */}
-      <footer className="site-footer bg-black py-20 border-t border-white/10 relative z-10">
-        <div className="footer-container max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-             
-             {/* Brand Column */}
-             <div className="col-span-1 md:col-span-1">
-                <h2 className="text-2xl font-[Orbitron] font-black text-white mb-4">RAGE VENTURE</h2>
-                <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                  Una plataforma global para la música electrónica y el arte digital. Rompiendo barreras entre lo físico y lo virtual.
-                </p>
-                <div className="flex gap-4">
-                  {[Twitter, Instagram, Youtube].map((Icon, i) => (
-                    <a key={i} href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:bg-white hover:text-black hover:scale-110 transition-all">
-                      <Icon size={16} />
-                    </a>
-                  ))}
-                </div>
-             </div>
-             
-             {/* Links Columns */}
-             <div className="col-span-1">
-                <h3 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Explorar</h3>
-                <nav className="flex flex-col gap-3">
-                  <a href="#artists" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Artistas</a>
-                  <a href="#releases" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Lanzamientos</a>
-                  <a href="#events" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Eventos</a>
-                  <a href="#news" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Magazine</a>
-                </nav>
-             </div>
-             
-             <div className="col-span-1">
-                <h3 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Comunidad</h3>
-                <nav className="flex flex-col gap-3">
-                  <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Unirse al Discord</a>
-                  <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Enviar Demo</a>
-                  <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Trabaja con Nosotros</a>
-                  <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">Prensa</a>
-                </nav>
-             </div>
+      {/* FOOTER REDISEÑADO */}
+      <footer className="site-footer bg-white py-16 relative z-10">
+        {/* Top Section - Logo y Redes */}
+        <div className="max-w-7xl mx-auto px-6 text-center mb-16 pb-16 border-b border-gray-200">
+          {/* Logo */}
+          <div className="mb-8">
+            <img src="/assets/logoragevee.png" alt="RAGE VENTURE" className="h-12 mx-auto mb-6" />
+          </div>
+          
+          {/* Brand Name */}
+          <h2 className="text-2xl font-[TurnKey] font-black text-black tracking-widest mb-8">
+            RAGE VENTURE
+          </h2>
+          
+          {/* Social Icons */}
+          <div className="flex justify-center gap-6 items-center">
+            <a href="#" className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+            </a>
+            <a href="#" className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 9-5 9-5z"/></svg>
+            </a>
+            <a href="#" className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23 0H1v24h22V0zM15.5 8.5l-2 .25-1.5 4v4.25h-2.5V9.25l1.5-3.75 2.5-.5v.75h2v-1z"/></svg>
+            </a>
+            <a href="#" className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center text-gray-600 hover:border-blue-500 hover:text-blue-500 transition-all">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
+            </a>
+          </div>
+        </div>
 
-             {/* Newsletter */}
-             <div className="col-span-1">
-              <h3 className="text-white font-bold mb-6 uppercase tracking-widest text-xs">Newsletter</h3>
-              <p className="text-gray-400 text-xs mb-4">Suscríbete para acceso anticipado a tickets y lanzamientos exclusivos.</p>
-              <form className="flex flex-col gap-2" onSubmit={(e) => e.preventDefault()}>
-                <input type="email" placeholder="TU EMAIL" className="bg-white/5 border border-white/10 rounded px-4 py-3 text-xs text-white w-full focus:border-blue-500 outline-none" />
-                <button type="submit" className="bg-blue-600 text-white px-4 py-3 rounded text-xs font-bold hover:bg-blue-500 uppercase tracking-widest transition-colors">Suscribirse</button>
+        {/* Middle Section - Links en Grid */}
+        <div className="max-w-7xl mx-auto px-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+            
+            {/* SERVICIOS */}
+            <div>
+              <h3 className="text-sm font-[TurnKey] font-bold text-black uppercase tracking-widest mb-6 pb-3 border-b-2 border-blue-500">
+                Servicios
+              </h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Alquiler de Recursos</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Tienda Online</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Próximos Eventos</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Clases & Bootcamps</a></li>
+              </ul>
+            </div>
+
+            {/* COMPAÑÍA */}
+            <div>
+              <h3 className="text-sm font-[TurnKey] font-bold text-black uppercase tracking-widest mb-6 pb-3 border-b-2 border-blue-500">
+                Conocenos
+              </h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Sobre Nosotros</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Contacto</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Blog</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Press Kit</a></li>
+              </ul>
+            </div>
+
+            {/* RECURSOS */}
+            <div>
+              <h3 className="text-sm font-[TurnKey] font-bold text-black uppercase tracking-widest mb-6 pb-3 border-b-2 border-blue-500">
+                Recursos
+              </h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Documentación</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Preguntas Frecuentes</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Soporte</a></li>
+                <li><a href="#" className="text-sm text-gray-700 hover:text-blue-500 transition-colors">Comunidad</a></li>
+              </ul>
+            </div>
+
+            {/* NEWSLETTER */}
+            <div>
+              <h3 className="text-sm font-[TurnKey] font-bold text-black uppercase tracking-widest mb-6 pb-3 border-b-2 border-blue-500">
+                Newsletter
+              </h3>
+              <p className="text-sm text-gray-700 mb-4">
+                Recibe updates exclusivos sobre eventos, releases y oportunidades.
+              </p>
+              <form className="flex gap-2" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="email"
+                  placeholder="tu@email.com"
+                  className="flex-1 px-4 py-2 text-sm bg-gray-100 border border-gray-300 rounded text-gray-900 placeholder-gray-500 focus:outline-none focus:border-blue-500"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-2 bg-blue-500 text-white text-xs font-bold rounded hover:bg-blue-600 transition-colors uppercase tracking-wide"
+                >
+                  Suscribir
+                </button>
               </form>
             </div>
           </div>
-          
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-gray-600 text-[10px] font-mono uppercase tracking-wider">© 2025 RAGE VENTURE. ALL RIGHTS RESERVED.</div>
+        </div>
+
+        {/* Bottom Section - Copyright y Links Legales */}
+        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-gray-200">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-xs text-gray-500 font-mono uppercase tracking-wider">
+              © 2025 RAGE VENTURE. Todos los derechos reservados.
+            </div>
             <div className="flex gap-6">
-                <a href="#" className="text-gray-600 hover:text-gray-400 text-[10px] uppercase font-bold">Privacy Policy</a>
-                <a href="#" className="text-gray-600 hover:text-gray-400 text-[10px] uppercase font-bold">Terms of Service</a>
+              <a href="#" className="text-xs text-gray-500 hover:text-gray-700 uppercase font-bold transition-colors">Términos de Servicio</a>
+              <a href="#" className="text-xs text-gray-500 hover:text-gray-700 uppercase font-bold transition-colors">Política de Privacidad</a>
+              <a href="#" className="text-xs text-gray-500 hover:text-gray-700 uppercase font-bold transition-colors">Cookies</a>
             </div>
           </div>
         </div>
