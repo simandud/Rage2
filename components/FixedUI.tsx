@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Globe, User, LogIn } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 /**
  * ════════════════════════════════════════════════════════════════════════
@@ -78,6 +79,7 @@ const BRANDING_CONFIG = {
 export const FixedUI: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,7 +124,7 @@ export const FixedUI: React.FC = () => {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex justify-between items-center h-full">
           {/* Logo Brand - Responsive */}
           <div className="brand flex items-center gap-2 z-50 flex-shrink-0">
-            <a href="#" className="flex flex-col group" aria-label="Rage Venture Inicio">
+            <Link to="/" className="flex flex-col group" aria-label="Rage Venture Inicio">
               {/* Logo text - Responsive */}
               <span
                 className={`font-[${BRANDING_CONFIG.logo.fontFamily}] ${BRANDING_CONFIG.logo.fontWeight} ${BRANDING_CONFIG.logo.fontSize} tracking-tighter ${BRANDING_CONFIG.logo.color} ${BRANDING_CONFIG.logo.hoverColor} transition-colors ${BRANDING_CONFIG.logo.glowEffect}`}
@@ -135,7 +137,7 @@ export const FixedUI: React.FC = () => {
                   {BRANDING_CONFIG.subtitle.text}
                 </span>
               )}
-            </a>
+            </Link>
           </div>
 
           {/* Desktop Navigation - Hidden on mobile */}
@@ -144,22 +146,20 @@ export const FixedUI: React.FC = () => {
             role="navigation"
           >
             {['EVENTOS', 'ALQUILER', 'LANZAMIENTOS', 'CLASES', 'TIENDA'].map(
-              (item) => (
-                <a
-                  key={item}
-                  href={`#${
-                    item.toLowerCase() === 'label'
-                      ? 'music'
-                      : item.toLowerCase() === 'nosotros'
-                      ? 'about'
-                      : item.toLowerCase()
-                  }`}
-                  className={`nav-link ${BRANDING_CONFIG.navDesktop.fontSize} ${BRANDING_CONFIG.navDesktop.fontFamily} ${BRANDING_CONFIG.navDesktop.letterSpacing} ${BRANDING_CONFIG.navDesktop.color} ${BRANDING_CONFIG.navDesktop.hoverColor} relative group py-2 whitespace-nowrap transition-colors`}
-                >
-                  {item}
-                  <span className={`absolute bottom-0 left-0 w-0 h-[2px] ${BRANDING_CONFIG.navDesktop.underlineColor} transition-all duration-300 group-hover:w-full`}></span>
-                </a>
-              )
+              (item) => {
+                const path = `/${item.toLowerCase()}`;
+                const isActive = location.pathname === path;
+                return (
+                  <Link
+                    key={item}
+                    to={path}
+                    className={`nav-link ${BRANDING_CONFIG.navDesktop.fontSize} ${BRANDING_CONFIG.navDesktop.fontFamily} ${BRANDING_CONFIG.navDesktop.letterSpacing} ${isActive ? 'text-blue-400' : BRANDING_CONFIG.navDesktop.color} ${BRANDING_CONFIG.navDesktop.hoverColor} relative group py-2 whitespace-nowrap transition-colors`}
+                  >
+                    {item}
+                    <span className={`absolute bottom-0 left-0 ${isActive ? 'w-full' : 'w-0'} h-[2px] ${BRANDING_CONFIG.navDesktop.underlineColor} transition-all duration-300 group-hover:w-full`}></span>
+                  </Link>
+                );
+              }
             )}
           </nav>
 
@@ -179,14 +179,14 @@ export const FixedUI: React.FC = () => {
                 <User size={16} className="sm:w-[18px] sm:h-[18px]" />
               </button>
             </div>
-            <a
-              href="#contact"
+            <Link
+              to="/#contact"
               className={`px-4 xl:px-6 py-2 border rounded-none skew-x-[-10deg] ${BRANDING_CONFIG.buttonContacto.fontSize} ${BRANDING_CONFIG.buttonContacto.fontWeight} ${BRANDING_CONFIG.buttonContacto.letterSpacing} ${BRANDING_CONFIG.buttonContacto.textColor} ${BRANDING_CONFIG.buttonContacto.bgColor} backdrop-blur-sm ${BRANDING_CONFIG.buttonContacto.borderColor} ${BRANDING_CONFIG.buttonContacto.hoverBg} ${BRANDING_CONFIG.buttonContacto.hoverText} ${BRANDING_CONFIG.buttonContacto.glowEffect} transition-all flex items-center gap-2 group whitespace-nowrap`}
             >
               <span className="skew-x-[10deg] inline-block group-hover:translate-x-1 transition-transform">
                 {BRANDING_CONFIG.buttonContacto.text}
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle - Visible only on mobile */}
@@ -218,39 +218,39 @@ export const FixedUI: React.FC = () => {
 
         {/* Menu Items */}
         <div className="relative z-10 flex flex-col items-center gap-4 sm:gap-6">
-          {['NOSOTROS', 'ARTISTAS', 'LANZAMIENTOS', 'LABEL', 'EVENTOS', 'NOTICIAS'].map(
-            (item, idx) => (
-              <a
-                key={item}
-                href={`#${
-                  item.toLowerCase() === 'label'
-                    ? 'music'
-                    : item.toLowerCase() === 'nosotros'
-                    ? 'about'
-                    : item.toLowerCase() === 'noticias'
-                    ? 'news'
-                    : item.toLowerCase()
-                }`}
+          {[
+            { label: 'INICIO', path: '/' },
+            { label: 'EVENTOS', path: '/eventos' },
+            { label: 'ALQUILER', path: '/alquiler' },
+            { label: 'LANZAMIENTOS', path: '/lanzamientos' },
+            { label: 'CLASES', path: '/clases' },
+            { label: 'TIENDA', path: '/tienda' }
+          ].map((item, idx) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <Link
+                key={item.label}
+                to={item.path}
                 onClick={() => setIsMenuOpen(false)}
-                className={`${BRANDING_CONFIG.navMobile.fontSize} ${BRANDING_CONFIG.navMobile.fontFamily} ${BRANDING_CONFIG.navMobile.letterSpacing} text-transparent bg-clip-text bg-gradient-to-b ${BRANDING_CONFIG.navMobile.gradient} hover:to-blue-500 transition-all transform hover:scale-105 cursor-pointer`}
+                className={`${BRANDING_CONFIG.navMobile.fontSize} ${BRANDING_CONFIG.navMobile.fontFamily} ${BRANDING_CONFIG.navMobile.letterSpacing} text-transparent bg-clip-text bg-gradient-to-b ${isActive ? 'from-blue-400 to-blue-600' : BRANDING_CONFIG.navMobile.gradient} hover:to-blue-500 transition-all transform hover:scale-105 cursor-pointer`}
                 style={{
                   transitionDelay: `${idx * 50}ms`,
                   animation: isMenuOpen ? `fadeInUp 0.5s ease-out ${idx * 50}ms backwards` : 'none',
                 }}
               >
-                {item}
-              </a>
-            )
-          )}
+                {item.label}
+              </Link>
+            );
+          })}
 
           {/* Contact Button in Mobile Menu */}
-          <a
-            href="#contact"
+          <Link
+            to="/#contact"
             onClick={() => setIsMenuOpen(false)}
             className="mt-4 sm:mt-8 px-8 sm:px-10 py-3 sm:py-4 bg-blue-600 rounded-full font-bold tracking-widest text-white text-sm sm:text-base shadow-[0_0_20px_rgba(0,123,255,0.5)] hover:bg-blue-500 transition-colors active:scale-95"
           >
             CONTACTO
-          </a>
+          </Link>
         </div>
       </nav>
 

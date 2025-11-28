@@ -2,12 +2,15 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, Loader } from "@react-three/drei";
 import { ThreeBackground } from "./components/ThreeBackground";
-import { Overlay } from "./components/Overlay";
 import { FixedUI } from "./components/FixedUI";
 import { GLBBackground } from "./components/GLBBackground";
-import { BrowserRouter } from "react-router-dom";
-// OJO: esta importación no la estás usando aún
-// import { HomePage } from "./src/pages/Alquiler";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home } from "./pages/Home";
+import { Eventos } from "./pages/Eventos";
+import { Alquiler } from "./pages/Alquiler";
+import { Lanzamientos } from "./pages/Lanzamientos";
+import { Clases } from "./pages/Clases";
+import { Tienda } from "./pages/Tienda";
 
 const App: React.FC = () => {
   return (
@@ -80,7 +83,14 @@ const App: React.FC = () => {
             pointerEvents: "auto",
           }}
         >
-          <Overlay />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/alquiler" element={<Alquiler />} />
+            <Route path="/lanzamientos" element={<Lanzamientos />} />
+            <Route path="/clases" element={<Clases />} />
+            <Route path="/tienda" element={<Tienda />} />
+          </Routes>
         </div>
 
         <Loader
