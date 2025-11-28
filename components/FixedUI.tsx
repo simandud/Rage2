@@ -143,7 +143,7 @@ export const FixedUI: React.FC = () => {
             className="hidden lg:flex items-center gap-4 xl:gap-8 header-nav"
             role="navigation"
           >
-            {['EVENTOS', 'ALQUILER', 'LANZAMIENTOS', 'EVENTOS', 'TIENDA'].map(
+            {['EVENTOS', 'ALQUILER', 'LANZAMIENTOS', 'CLASES', 'TIENDA'].map(
               (item) => (
                 <a
                   key={item}
