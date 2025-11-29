@@ -1,16 +1,9 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, Loader } from "@react-three/drei";
-import { ThreeBackground } from "./components/ThreeBackground";
-import { FixedUI } from "./components/FixedUI";
-import { GLBBackground } from "./components/GLBBackground";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { Eventos } from "./pages/Eventos";
-import { Alquiler } from "./pages/Alquiler";
-import { Lanzamientos } from "./pages/Lanzamientos";
-import { Clases } from "./pages/Clases";
-import { Tienda } from "./pages/Tienda";
+import { ThreeBackground, GLBBackground, Layout } from "./components";
+import { Home, Eventos, Alquiler, Lanzamientos, Clases, Tienda, NotFound } from "./pages";
 
 const App: React.FC = () => {
   return (
@@ -33,7 +26,7 @@ const App: React.FC = () => {
           } as React.CSSProperties
         }
       >
-        <FixedUI />
+        <Layout />
 
         <div
           className="fixed inset-0 w-full h-screen z-0 pointer-events-none"
@@ -90,6 +83,7 @@ const App: React.FC = () => {
             <Route path="/lanzamientos" element={<Lanzamientos />} />
             <Route path="/clases" element={<Clases />} />
             <Route path="/tienda" element={<Tienda />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
 
