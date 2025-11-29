@@ -1,13 +1,9 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, Loader } from "@react-three/drei";
-import { ThreeBackground } from "./components/ThreeBackground";
-import { Overlay } from "./components/Overlay";
-import { FixedUI } from "./components/FixedUI";
-import { GLBBackground } from "./components/GLBBackground";
-import { BrowserRouter } from "react-router-dom";
-// OJO: esta importación no la estás usando aún
-// import { HomePage } from "./src/pages/Alquiler";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThreeBackground, GLBBackground, Layout } from "./components";
+import { Home, Eventos, Alquiler, Lanzamientos, Clases, Tienda, NotFound } from "./pages";
 
 const App: React.FC = () => {
   return (
@@ -30,7 +26,7 @@ const App: React.FC = () => {
           } as React.CSSProperties
         }
       >
-        <FixedUI />
+        <Layout />
 
         <div
           className="fixed inset-0 w-full h-screen z-0 pointer-events-none"
@@ -80,7 +76,15 @@ const App: React.FC = () => {
             pointerEvents: "auto",
           }}
         >
-          <Overlay />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/eventos" element={<Eventos />} />
+            <Route path="/alquiler" element={<Alquiler />} />
+            <Route path="/lanzamientos" element={<Lanzamientos />} />
+            <Route path="/clases" element={<Clases />} />
+            <Route path="/tienda" element={<Tienda />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
 
         <Loader
