@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'TurnKey';
+  src: url('/public/assets/Fontspring-DEMO-turnkeysoft-bolditalic.otf');
+  font-weight: 400 900;
+  font-style: normal;
+}
 :root {
   --bg-color: #030109;
   --accent: #007BFF;
@@ -16,8 +22,9 @@ html {
 body {
   background-color: var(--bg-color);
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Bebas Neue', sans-serif;
   overflow-x: hidden;
+  
 }
 
 /* Custom Scrollbar */
@@ -59,7 +66,7 @@ body {
 }
 
 .section-meta {
-  font-family: 'Space Mono', monospace;
+  font-family: 'Helvetica', sans-serif;
   color: var(--accent);
   font-size: 0.75rem;
   letter-spacing: 0.3em;
@@ -71,7 +78,7 @@ body {
 
 /* Rage Logo Text */
 .rage-logo-text {
-  font-family: 'Orbitron', sans-serif;
+  font-family: 'TurnKey', sans-serif;
   font-size: clamp(3rem, 10vw, 8rem);
   font-weight: 900;
   font-style: italic;
@@ -97,7 +104,7 @@ body {
   display: inline-block;
   padding-left: 100%;
   animation: marquee 60s linear infinite;
-  font-family: 'Orbitron', monospace;
+  font-family: 'Bebas Neue', sans-serif;
   font-weight: 700;
   letter-spacing: 2px;
   font-size: 0.7rem;
@@ -131,4 +138,90 @@ button:focus {
 
 .cursor-wait {
     cursor: wait;
+}
+
+/* ===========================
+   ESPACIADO ENTRE SECCIONES
+   =========================== */
+
+/* Separa todas las secciones dentro de <main> */
+main > section {
+  margin-top: 6rem;
+  margin-bottom: 6rem;
+}
+
+/* Un poco más de aire en pantallas medias */
+@media (min-width: 768px) {
+  main > section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+
+/* Y todavía más en escritorio grande */
+@media (min-width: 1024px) {
+  main > section {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+}
+
+/* La primera sección no se baja tanto del header */
+main > section:first-of-type {
+  margin-top: 1.5rem;
+}
+
+/* Siempre deja espacio antes del footer blanco
+   (en tus páginas donde el <Footer /> está dentro de <main>) */
+main > footer {
+  margin-top: 4rem;
+}
+/* Track fino tipo DJ (puedes dejarlo igual si ya lo tienes) */
+.dj-crossfader::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.9),
+    rgba(168, 85, 247, 0.9)
+  );
+}
+
+.dj-crossfader::-moz-range-track {
+  height: 3px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.9),
+    rgba(168, 85, 247, 0.9)
+  );
+}
+
+/* 🔹 Perilla tipo crossfader de DJ (rectángulo pequeño) */
+.dj-crossfader::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 26px;          /* más largo */
+  height: 18px;         /* bajito */
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #e5e7eb, #9ca3af);
+  border: 2px solid #020617; /* casi negro */
+  margin-top: -7.5px;   /* centra la perilla sobre el track */
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+/* Firefox */
+.dj-crossfader::-moz-range-thumb {
+  width: 26px;
+  height: 18px;
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #e5e7eb, #9ca3af);
+  border: 2px solid #020617;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
 }

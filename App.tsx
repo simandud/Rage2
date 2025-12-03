@@ -3,7 +3,16 @@ import { Canvas } from "@react-three/fiber";
 import { ScrollControls, Scroll, Loader } from "@react-three/drei";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThreeBackground, GLBBackground, Layout } from "./components";
-import { Home, Eventos, Alquiler, Lanzamientos, Clases, Tienda, NotFound } from "./pages";
+import MidiController from "./components/interactive/MidiController"; // 👈 NUEVO
+import {
+  Home,
+  Eventos,
+  Alquiler,
+  Lanzamientos,
+  Clases,
+  Tienda,
+  NotFound,
+} from "./pages";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +37,7 @@ const App: React.FC = () => {
       >
         <Layout />
 
+        {/* Capa 3D global */}
         <div
           className="fixed inset-0 w-full h-screen z-0 pointer-events-none"
           style={{
@@ -56,8 +66,14 @@ const App: React.FC = () => {
           >
             <Suspense fallback={null}>
               <ScrollControls pages={8} damping={0.2} distance={1}>
+                {/* capa 1: partículas / bg */}
                 <ThreeBackground />
+
+                {/* capa 2: glb grande */}
                 <GLBBackground />
+
+                {/* capa 3: controlador MIDI flotando */}
+                <MidiController position={[0, -0.8, 0]} />
 
                 <Scroll html style={{ width: "100%" }}>
                   <div style={{ width: "100%" }} />
@@ -67,6 +83,7 @@ const App: React.FC = () => {
           </Canvas>
         </div>
 
+        {/* Contenido HTML encima */}
         <div
           className="relative z-10 w-full pointer-events-auto"
           style={{
