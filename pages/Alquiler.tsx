@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ShoppingBag, Disc, Headphones, Music, Radio, Speaker, Check, Star } from 'lucide-react';
 import { Footer } from '../components/shared/Footer';
@@ -21,6 +21,26 @@ const cardVariant = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }
 };
 
+/* 🔥 CARRUSEL HERO (FONDO + FRASE FIJA) */
+const HERO_SLIDES = [
+  {
+    id: 1,
+    image: './assets/2.1meet2go.png'
+  },
+  {
+    id: 2,
+    image: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&q=80'
+  },
+  {
+    id: 3,
+    image: 'https://images.unsplash.com/photo-1518976024611-28bf4b48222e?w=1600&q=80'
+  },
+  {
+    id: 4,
+    image: './assets/logoragevee.png'
+  }
+];
+
 // Fictional DJ Equipment for Rental
 const EQUIPMENT_RENTAL = [
   {
@@ -32,7 +52,7 @@ const EQUIPMENT_RENTAL = [
     specs: ["Motor Directo", "Pitch ±8/±16%", "Reverse Mode", "Target Light"],
     price: "€45/día",
     weekPrice: "€250/semana",
-    image: "https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=800&q=80",
+    image: "./assets/IMG_2241.DNG",
     rating: 5,
     available: true
   },
@@ -45,7 +65,7 @@ const EQUIPMENT_RENTAL = [
     specs: ["4 Canales", "32-bit/96kHz", "Beat FX", "Sound Color FX"],
     price: "€60/día",
     weekPrice: "€350/semana",
-    image: "https://images.unsplash.com/photo-1598653222000-6b7b7a552625?w=800&q=80",
+    image: "./assets/IMG_2235.DNG",
     rating: 5,
     available: true
   },
@@ -58,7 +78,7 @@ const EQUIPMENT_RENTAL = [
     specs: ["6 Canales", "Dual VCF Filters", "Scene Memory", "XLR Outputs"],
     price: "€70/día",
     weekPrice: "€400/semana",
-    image: "https://images.unsplash.com/photo-1571330735066-03aaa9429d89?w=800&q=80",
+    image: "./assets/IMG_2237.DNG",
     rating: 5,
     available: true
   },
@@ -144,16 +164,81 @@ const EQUIPMENT_RENTAL = [
 
 export const Alquiler: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const categories = ["Todos", "Tornamesas", "Mezcladores", "Auriculares", "Monitores", "Controladores", "Cápsulas", "Drum Machines"];
 
-  const filteredEquipment = selectedCategory === "Todos"
-    ? EQUIPMENT_RENTAL
-    : EQUIPMENT_RENTAL.filter(item => item.category === selectedCategory);
+  const filteredEquipment =
+    selectedCategory === "Todos"
+      ? EQUIPMENT_RENTAL
+      : EQUIPMENT_RENTAL.filter(item => item.category === selectedCategory);
+
+  /* ⏱️ AUTO-SLIDE DEL HERO */
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % HERO_SLIDES.length);
+    }, 6000); // cada 6 segundos
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <main className="w-full relative z-10 overflow-hidden min-h-screen pt-32 pb-20">
-      {/* Hero Section */}
+
+      {/* 🔥 HERO CARRUSEL FULL WIDTH */}
+      <section className="relative w-screen left-1/2 -translate-x-1/2 h-[60vh] md:h-[70vh] overflow-hidden mb-16">
+        {/* Imágenes del carrusel */}
+        <div className="absolute inset-0">
+          {HERO_SLIDES.map((slide, index) => (
+            <motion.img
+              key={slide.id}
+              src={slide.image}
+              alt={`Rave ${index + 1}`}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{
+                opacity: index === currentSlide ? 1 : 0,
+                scale: index === currentSlide ? 1.02 : 1.05
+              }}
+              transition={{ duration: 0.8 }}
+            />
+          ))}
+          {/* Oscurecer para que se lea el texto */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+        </div>
+
+        {/* Texto encima del carrusel */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <span className="text-xs md:text-sm font-mono tracking-[0.35em] text-blue-300 mb-4 uppercase">
+            ALQUILER PROFESIONAL DE EQUIPO DJ
+          </span>
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-[Bebas_Neue] text-white tracking-[0.08em] leading-tight mb-4">
+            A DRUM &amp; BASS, TECHNO &amp; HOUSE RAVE,
+            <br className="hidden md:block" />
+            EQUIPAMIENTO CURADO PARA TU EVENTO
+          </h1>
+          <p className="max-w-2xl text-sm md:text-lg text-gray-200">
+            Alquila el mismo gear que usan los clubes: tornamesas Technics, mixers Pioneer,
+            monitores de estudio y más, listo para que solo llegues y rompas la pista.
+          </p>
+
+          {/* Dots del carrusel */}
+          <div className="flex gap-2 mt-6">
+            {HERO_SLIDES.map((slide, index) => (
+              <button
+                key={slide.id}
+                onClick={() => setCurrentSlide(index)}
+                className={`h-2.5 w-2.5 rounded-full border border-white/70 transition-all ${
+                  currentSlide === index ? 'bg-white w-7' : 'bg-white/30'
+                }`}
+                aria-label={`Ir al slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hero Section (texto + filtros) */}
       <motion.section
         className="panel mb-20"
         initial="hidden"
@@ -166,12 +251,11 @@ export const Alquiler: React.FC = () => {
             animate={{ scale: 1, opacity: 1, rotate: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <ShoppingBag className="w-20 h-20 mx-auto mb-6 text-blue-500" />
-          </motion.div>
+           </motion.div>
           <span className="section-meta">EQUIPAMIENTO PROFESIONAL</span>
-          <h1 className="text-6xl md:text-8xl font-[Bebas_Neue] text-white mb-6 tracking-wider">
-            ALQUILER DJ
-          </h1>
+          <h2 className="text-6xl md:text-8xl font-[Bebas_Neue] text-white mb-6 tracking-wider">
+            ALQUILER 
+          </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Accede al mejor equipo profesional para tus sesiones, eventos y producciones.
             Desde tornamesas Technics hasta mezcladores de alta gama.
@@ -221,11 +305,13 @@ export const Alquiler: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
                 {/* Availability Badge */}
-                <div className={`absolute top-4 right-4 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${
-                  item.available
-                    ? 'bg-green-500/20 border border-green-500 text-green-400'
-                    : 'bg-red-500/20 border border-red-500 text-red-400'
-                }`}>
+                <div
+                  className={`absolute top-4 right-4 px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full ${
+                    item.available
+                      ? 'bg-green-500/20 border border-green-500 text-green-400'
+                      : 'bg-red-500/20 border border-red-500 text-red-400'
+                  }`}
+                >
                   {item.available ? 'Disponible' : 'Alquilado'}
                 </div>
 

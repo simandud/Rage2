@@ -185,7 +185,40 @@ export const Tienda: React.FC = () => {
 
   return (
     <main className="w-full relative z-10 overflow-hidden min-h-screen pt-32 pb-20">
-      {/* Hero Section */}
+      {/* HERO DE VIDEO FULL WIDTH (MINIMALISTA) */}
+      <motion.section
+        className="relative mb-20"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+      >
+        {/* Rompemos el max-width del panel y usamos todo el ancho */}
+        <div className="w-screen relative left-1/2 -translate-x-1/2 overflow-hidden bg-black">
+          <video
+            className="w-full h-[55vh] md:h-[100vh] object-cover opacity-80"
+            src="./assets/generated.mp4"  // 👉 cambia esta ruta por tu video
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          {/* Capa para texto minimal */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/70 pointer-events-none" />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 pointer-events-none">
+            <p className="text-xs md:text-sm font-mono tracking-[0.35em] text-gray-300 uppercase mb-3">
+              NEW DROP · RAGE VENTURE
+            </p>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-[Bebas_Neue] text-white tracking-[0.2em] mb-4">
+              RAVE READY MERCH
+            </h1>
+            <p className="text-sm md:text-base text-gray-300 max-w-xl">
+              Piezas limitadas para club, calle y after. Desliza y encuentra tu próximo fit.
+            </p>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Hero Section TEXTO TIENDA */}
       <motion.section
         className="panel mb-20"
         initial="hidden"
@@ -202,7 +235,7 @@ export const Tienda: React.FC = () => {
           </motion.div>
           <span className="section-meta">MERCHANDISE OFICIAL</span>
           <h1 className="text-6xl md:text-8xl font-[Bebas_Neue] text-white mb-6 tracking-wider">
-            TIENDA
+            CYBER MONDAY
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Ropa exclusiva, accesorios para DJ y productos de edición limitada.
@@ -225,7 +258,7 @@ export const Tienda: React.FC = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 justify-center md:justify-end">
             {categories.map((category) => (
               <button
                 key={category}
@@ -311,22 +344,18 @@ export const Tienda: React.FC = () => {
 
               {/* Product Info */}
               <div className="p-5">
-                {/* Category */}
                 <span className="text-xs font-bold text-blue-400 uppercase tracking-wider">
                   {product.category}
                 </span>
 
-                {/* Name */}
                 <h3 className="text-lg font-bold text-white mt-2 mb-2 group-hover:text-blue-400 transition-colors line-clamp-2">
                   {product.name}
                 </h3>
 
-                {/* Description */}
                 <p className="text-xs text-gray-400 mb-3 line-clamp-2">
                   {product.description}
                 </p>
 
-                {/* Rating */}
                 <div className="flex items-center gap-2 mb-4">
                   <div className="flex items-center gap-0.5">
                     {[...Array(5)].map((_, idx) => (
@@ -340,7 +369,6 @@ export const Tienda: React.FC = () => {
                   <span className="text-xs text-gray-500">({product.reviews})</span>
                 </div>
 
-                {/* Price & Action */}
                 <div className="flex items-center justify-between border-t border-white/10 pt-4">
                   <div>
                     <p className="text-2xl font-bold text-white">{product.price}</p>
@@ -355,7 +383,6 @@ export const Tienda: React.FC = () => {
                 </div>
               </div>
 
-              {/* Hover Accent */}
               <div className="absolute left-0 bottom-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </motion.div>
           ))}
