@@ -152,7 +152,7 @@ export const ThreeBackground: React.FC = () => {
   // ════════════════════════════════════════════════════════════════════════
 
   const BLUE_DARK_PALETTE = [
-    '#2F82C5',    // 0.0  - Azul oscuro inicial
+    '#00495C',    // 0.0  - Azul oscuro inicial
     '#001240',    // 0.15 - Azul más oscuro
     '#000d33',    // 0.3  - Azul muy oscuro
     '#000a26',    // 0.45 - Azul muy oscuro intenso
@@ -163,8 +163,8 @@ export const ThreeBackground: React.FC = () => {
   ];
 
   const GRID_COLOR = '#0055ff';
-  const GRID_DENSITY = 60;
-  const ANIMATION_SPEED = 5;
+  const GRID_DENSITY = 100;
+  const ANIMATION_SPEED = 6;
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const starCount = isMobile ? 2000 : 4000;
@@ -241,7 +241,7 @@ export const ThreeBackground: React.FC = () => {
     <>
       {/* BACKGROUND COLOR - Azul oscuro, cambia con scroll */}
       <color attach="background" args={['#71BBE3']} />
-      <fog attach="fog" args={['#2F82C5', 10, 50]} />
+      <fog attach="fog" args={['#00495C', 30, 50]} />
 
       {/* STARS */}
       <group ref={starsRef}>
